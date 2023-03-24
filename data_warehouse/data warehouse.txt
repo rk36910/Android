@@ -1,5 +1,14 @@
 
 
+ipconfig
+ping
+nslookup
+netstat -a
+route print
+Pathping
+
+
+
 <?php
     define('HOST','localhost');
     define('USER','id19081534');
