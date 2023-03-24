@@ -1,0 +1,148 @@
+
+
+<?php
+    define('HOST','localhost');
+    define('USER','id19081534');
+    define('PASS','to');
+    define('DB','id190815');
+    
+    $con=mysqli_connect(HOST,USER,PASS,DB) or die('unable to connect');
+
+?>
+
+
+
+
+
+1....insert
+
+<?php
+
+
+include 'connect.php' ;
+
+$Name=$_POST["name"];
+$Surname=$_POST["surname"];
+$Email=$_POST["email"];
+$Password=$_POST["password"];
+
+if($Name=="" && $Surname=="" && $Email=="" && $Password=="" )
+{
+echo '0';
+}
+else
+{
+$sql="insert into delete_and_insert (name,surname,email,password) values('$Name','$Surname','$Email','$Password')";
+
+$res = mysqli_query($con,$sql);
+}
+?>
+
+
+
+
+
+
+
+
+
+2.....delete
+
+<?php
+
+     include 'connect.php' ;
+     
+     $id=$_POST["id"];
+     
+      $sql="delete from delete_and_insert where id='$id'";
+     
+     echo $sql;
+     
+     if(mysqli_query($con,$sql))
+     {
+         echo'Record Deleted Successfully';
+         
+     }
+     else
+     {
+         echo'Someting went wrong';
+     }
+     mysqli_close($con);
+
+?>
+
+
+
+3...view
+
+<?php
+
+    include('connect.php');
+    $sql="select * from delete_and_insert";
+    
+    $r=mysqli_query($con,$sql);
+    $response=array();
+    
+    while($row=mysqli_fetch_array($r))
+    {
+        $value["id"]=$row["id"];
+        $value["name"]=$row["name"];
+        $value["surname"]=$row["surname"];
+        $value["email"]=$row["email"];
+        $value["password"]=$row["password"];
+                
+        array_push($response,$value);
+        
+    }
+    
+    echo json_encode($response);
+    mysqli_close($con);
+    
+?>
+
+
+
+
+4...upadate
+
+
+<?php
+
+include 'connect.php';
+$id=$_POST["id"];
+$name=$_POST["name"];
+$surname=$_POST["surname"];
+$email=$_POST["email"];
+$password=$_POST["password"];
+
+//$con=mysqli_connect("mysql9.000webhost.com","~HIDDEN~","password","~HIDDEN~");
+// Check connection
+
+
+$sql = "update delete_and_insert SET name = '$name', surname='$surname' ,email='$email',password='$password'where id='$id' ";
+
+if ($con->query($sql) === TRUE)
+{
+  echo "Record updated successfully";
+} 
+else 
+{
+  echo "Error updating record: " . $con->error;
+}
+
+mysqli_close($con);
+
+?>
+
+
+
+
+
+
+
+
+
+
+view -> solution Explorer(1) -> RightSide -> MyFirstProject(SQL Server 2017) right Click -> last Properties -> Configuration Properties(2) -> SQL Server 2019 -> apply & ok -> Right_side -> Package.dtsx click -> 
+
+
